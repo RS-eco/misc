@@ -1,0 +1,196 @@
+####################
+
+## Working with Github
+
+# Download and Install Git for Linux
+
+sudo apt-get install git
+
+# Configuring GitHub
+
+git config --global user.name "RS-eco"
+git config --global user.email "RS-eco@posteo.de"
+
+# Need to set SSH key online
+
+# Create a repository online
+
+#Clone repositories (Download from server)
+cd
+cd Documents/GitHub
+git clone https://github.com/RS-eco/ggmap2
+
+cd
+cd GitHub
+git init demo
+cd demo
+touch readme.md
+git add readme.md
+git reset readme.md
+git add readme.md (to get it back in the staging area)
+git commit -m "commit empty readme"
+
+git init individual-work
+cd individual-work
+touch readme.md
+git add readme.md
+git commit -m "initialized individual-work project"
+
+# Show activity
+git log
+
+# Check if there is a remote
+
+git remote
+
+# Create a location bookmark and send commit to a location
+git remote add origin https://github.com/RS-eco/individual-work.git
+
+# Upload file to GitHub (Push your master branch to remote master branch)
+
+git push origin master # Master is default branch
+
+git push -u origin master # Links remote with the local in a bookmark
+
+# After this you only need to run
+
+git push
+
+# Check bookmarks
+
+git remote -v
+
+# Get changes from online
+
+git fetch
+
+# Does not update working area or repository history
+
+git log
+
+# Log only shows 2 commits, rather than 3, although data exists locally.
+
+#Connect to the repository on GitHub
+
+cd Documents/GitHub/rISIMIP
+git remote add origin https://github.com/RS-eco/rISIMIP.git
+git config remote.origin.url git@github.com:RS-eco/rISIMIP.git
+git pull origin master
+git push origin master
+
+#Adding repository files to an index
+
+git add -A #Add all files to repository
+
+#Committing changes made to the index (upload to server)
+
+git commit -a -m "Update of all files"
+
+#Push contents of local repository on GitHub
+
+git push origin master
+
+# Push contents to branch (gh-pages for Website)
+
+git push origin gh-pages
+
+# Undo most recent commit
+
+git reset HEAD~
+
+#####
+
+## Git Large File Storage
+
+git lfs install
+
+# Manually add .gitattributes file with correct filenames!!!
+
+git add .gitattributes
+
+######
+
+## Delete all commit history in Github
+
+#Deleting the .git folder may cause problems in your git repository. If you want to delete all your commit history but keep the code in its current state, it is very safe to do it as in the following:
+
+# Checkout
+git checkout --orphan latest_branch
+
+# Add all the files
+git add -A
+
+# Commit the changes
+git commit -am "Upload files
+"
+
+# Delete the branch
+git branch -D master
+
+# Rename the current branch to master
+git branch -m master
+
+# Finally, force update your repository
+git push -f origin master
+
+# PS: this will not keep your old commit history around
+
+# For good houskeeping, after those commands, a nice, might be a good idea:
+git gc --aggressive --prune=all 
+
+######
+
+## Other Github commands
+
+# Find where your master commit points to
+
+git show master
+
+# Show list of branches
+
+git branch
+
+# Create new branch
+
+git branch newbranch
+
+# Check recent commit of new branch
+
+git show newbranch
+
+# Shows same latest commit as git show master, as it is just a copy of the master branch
+
+# You can also create branches from previous commits
+
+git branch planet master^ # Does not work, why???
+
+git branch planet master~3
+
+# Creates a new branch and then checks it out
+
+git checkout -b planet
+git commit
+git commit
+
+git checkout -b saturn
+
+# Switch branch
+
+git checkout planet
+
+# Create new branch, checkout and commit
+
+git branch jupiter
+git checkout jupiter
+git commit
+git commit
+
+# See all branches of a repository
+
+tree .git/refs
+
+# What is in those folders:
+
+cat .git/refs/heads/newbranch
+
+# It's a hash / commit ID

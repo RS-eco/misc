@@ -1,0 +1,361 @@
+---
+title: "Statistik für die Geisteswissenschaften mit Python"
+author: "Matthias Biber"
+date: "25/10/2019"
+output: 
+  pdf_document:
+    toc: true
+    number_sections: true
+    df_print: kable
+    fig_width: 7
+    fig_height: 6
+    fig_caption: true´
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, engine.path="/home/matt/anaconda3/bin/python3.7")
+
+library(reticulate)
+use_python("usr/bin/python3.7")
+```
+
+# Python Konventionen
+
+Für Befehle über mehrere Zeilen, benutzt man das Zeichen \ um Python zu informieren, dass der Befehl auch die nächste Zeile betrifft.
+
+```{python}
+value = 1 + \
+2 + \
+3
+```
+
+Man kann mehrere Befehle auf eine Zeile schreiben, diese werden dann mit einem ; voneinander getrennt
+
+```{python}
+a = "One"; b = "Two"; c= "Three"
+```
+
+Um eine Zeichenkette (String) zu schreiben, verwendet man Anführungszeichen (’) oder (")
+
+```{python}
+str1 = 'Hello every body'
+```
+
+Für einen Zeichenkette über mehrere Zeilen, verwendet man 3
+Anführungszeichen (”) ohne das Zeichen \ zu benutzen
+
+```{python}
+multiLineStr = """This is a paragraph. It is
+made up of multiple lines and sentences."""
+```
+
+Kommentare beginnen immer mit einem #
+
+```{python}
+# First comment
+print("Hello, Python!") # second comment
+# This is a comment.
+# This is a comment, too.
+# This is a comment, too.
+print("Finish")
+```
+
+# Python as Calculator
+
+```{python}
+# Typische Mathematische Operationen
+
+# Addition
+2 + 3
+# Subtraktion
+3.3 - 2
+# Multiplikation
+2 * (3.141 - 2)
+# Division
+10 / 4
+# Division ohne Rest
+10 // 4
+# Modulo bzw. Rest
+10 % 3
+# Potenz
+5 ** 5
+```
+
+# Hello World
+
+```{python}
+print("hello")
+print("world")
+```
+
+```{python}
+# Hello World
+print("Hellow World.")
+
+# Simple output
+print("Hello, I'm Python!")
+```
+
+```{python}
+x = 'hello, python world!'
+print(x)
+print(x.split(' '))
+```
+
+```{python, eval=F}
+# Input, assignment
+name = input('What is your name?\n')
+print('Hi, %s.' % name)
+```
+
+# Namensräume in Python
+
+```{python}
+# Import pi from Math package
+from math import pi
+
+# Print pi
+print(pi) # 3.14159
+
+# Define a variable, also called pi
+pi = 2
+
+# Print pi
+print(pi)
+```
+
+# Zeichenketten festlegen
+
+```{python}
+# einfache Anführungszeichen
+x = 'Hallo Welt.'
+
+# doppelte Anführungszeichen
+y = "Hallo Welt."
+print(x ==y)
+
+quote1 = "Sie sagte 'Hallo' zu mir."
+quote2 = 'Sie sagte "Hallo" zu mir.'
+print(quote1 == quote2)
+
+# Eine mehrzeilige Zeichenkette
+z = """Diese Zeichenkette besteht aus mehreren Zeilen.
+Das hier ist die zweite Zeile,
+das ist die dritte."""
+```
+
+# Methoden von Zeichenketten
+
+```{python}
+s = "Hallo Welt"
+
+s.lower()
+## 'hallo welt'
+s.upper()
+## 'HALLO WELT'
+s.startswith("H")
+## True
+s.endswith("x")
+## False
+
+s.isdigit()
+## 'hallo welt' ## False
+str.isdigit("6")
+## 'HALLO WELT' ## True
+s.split(" ")
+## True ## ['Hallo', 'Welt']
+"-".join(s.split(" "))
+## False ## 'Hallo-Welt'
+```
+
+# Indexierung von Zeichenketten
+
+```{python}
+n = "0123456789"
+
+n[0]
+## '0'
+n[0:3] == n[:3]
+
+## True
+n[0:9]
+## '012345678
+
+n[0] == n[:]
+## '0' ## '0123456789'
+
+n[::2]
+## True ## '02468'
+
+n[1::2]
+## '012345678' ## '13579'
+
+n[::-1]
+## '9876543210'
+```
+
+# Listen erstellen
+
+```{python}
+# leere Listen erstellen
+liste_leer1 = []
+liste_leer2 = list()
+liste_leer1 == liste_leer2
+
+# list()-Funktion auf Objekte anwenden
+list("Hello")
+```
+
+# Indexierung von Listen
+
+```{python}
+# Zuerst erstellen wir eine Liste
+liste = [9, 8, 7, 6, 5, 4]
+
+# Nun indexieren wir die Liste
+liste[1:3]
+liste[:2]
+liste[3:]
+liste[1::2]
+liste[-1::-1]
+```
+
+# Methoden von Listen
+
+```{python}
+liste1 = []
+liste2 = [4, 5]
+liste3 = [4, 3, 2, 5, 1]
+
+liste1.append(1) # Element anfügen
+liste1.extend(liste2) # Liste erweitern
+liste1.pop() # letztes Element herauslösen
+liste3.sort() # Liste sortieren
+liste3.remove(3) # spezifisches Element entfernen
+```
+
+# Listen anwenden
+
+```{python}
+# List comprehensions
+fruits = ['Banana', 'Apple', 'Lime']
+loud_fruits = [fruit.upper() for fruit in fruits]
+print(loud_fruits)
+## ['BANANA', 'APPLE', 'LIME']
+
+# List and the enumerate function
+list(enumerate(fruits))
+## [(0, 'Banana'), (1, 'Apple'), (2, 'Lime')]
+```
+
+# For-Schleife durch eine Liste
+
+```{python}
+numbers = [2, 4, 6, 8]
+product = 1
+
+for number in numbers:
+  product = product * number
+  print('The product is:', product)
+
+## ('The product is:', 384)
+```
+
+# Listen entschachteln
+
+```{python}
+import itertools
+
+liste = [[1,2,3], [4, 5, 6]]
+chain1 = list(itertools.chain(*liste))
+chain2 = list(itertools.chain.from_iterable(liste))
+
+print(chain1 == chain2)
+## True
+
+print(chain1)
+## [1, 2, 3, 4, 5, 6]
+```
+
+# Ein Dictionary sortieren
+
+```{python}
+d = {3: "drei", 1: "eins", 2: "zwei"}
+
+d_sorted = {k:v for (k,v) in sorted(d.items(), key=lambda x: x[0])}
+print(d_sorted)
+
+## {1: 'eins', 2: 'zwei', 3: 'drei'}
+
+# Einfacher Datenabgleich mithilfe von Key-Value-Paaren
+de_en = {"Hallo": "hello", "Welt": "world", "du": "you", "bist": "are", "schön": "beautiful",}
+
+trans = (de_en.get("Hallo"), de_en.get("Welt"), de_en.get("du"), de_en.get("bist"), de_en.get("schön"),)
+
+print("{} {}, {} {} {}!".format(*trans)) # tuple unpacking
+
+## hello world, you are beautiful!
+
+# default Parameter ändern
+de_en.get("großartig", "Wort nicht vorhanden")
+## 'Wort nicht vorhanden'
+```
+
+# Einem Dictionary neue Werte hinzufügen
+
+```{python}
+# Key-Value-Paar hinzufügen per Zuweisung
+de_en["großartig"] = "awesome"
+
+# Key-Value-Paar hinzufügen per update()-Methode
+de_en.update({"großartig": "awesome"})
+de_en.get("großartig", "Wort nicht vorhanden")
+
+## 'awesome'
+```
+
+# Wert-Mapping
+
+Text in Zahlen umwandeln
+
+```{python}
+antworten = ["gut", "ok", "schlecht", "sehr gut", "sehr schlecht", "weiß nicht", "so lala",]
+mapping = {"sehr schlecht": -2, "schlecht": -1, "ok": 0, "gut": 1, "sehr gut": 2, "weiß nicht": 8,}
+
+numerisch = [mapping.get(antwort, 99) for antwort in antworten]
+```
+
+Mapping erstellen aus zwei Listen
+
+```{python}
+labels = ["negativ", "neutral", "positiv"]
+number = [-1, 0, 1]
+mapping = {n: l for (n, l) in zip(number, labels)}
+```
+
+# Sets und ausgewählte Methoden
+
+```{python}
+s1 = {1, 2, 3, 4}
+liste = [1, 3, 5, 7, 7, 3, 1]
+s2 = set(liste)
+
+s1.union(s2) ## set([1, 2, 3, 4, 5, 7])
+
+s1.intersection(s2) ## set([1, 3])
+
+s1.difference(s2) ## set([2, 4])
+
+s2.difference(s1) ## set([5, 7])
+
+s1.add(8)
+```
+
+########################################
+
+# Load packages
+
+```{python}
+import pandas as pd
+import seaborn as sns
+```

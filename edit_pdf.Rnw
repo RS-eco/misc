@@ -1,0 +1,24 @@
+\documentclass{article}
+\usepackage{pdfpages}
+\usepackage{pgf}
+
+% Only for pgfimage
+%\usepackage[scale=1, top=0cm, bottom=0cm]{geometry}
+
+\begin{document}
+
+% Only needed for includepdfmerge
+\pdfminorversion=5
+\pdfobjcompresslevel=3 
+\pdfcompresslevel=9
+
+%\pgfimage[height=\textheight]{/home/mabi/Documents/Wissenschaft/MBJournal/20140820_094959} 
+%\newpage
+%\pgfimage[height=\textheight]{/home/mabi/Documents/Wissenschaft/MBJournal/20140820_095004} 
+
+%\includepdfset{landscape=TRUE, turn=TRUE}
+\includepdfmerge{/home/mabi/Documents/Wissenschaft/MBJournal/Unknown_Marine_biology_101_4_1989.pdf, 121-131}
+
+%\includepdfmerge[landscape=TRUE]{/home/mabi/Desktop/Buch/36109878120824580_doc08686420161105175130.pdf}
+
+\end{document}
