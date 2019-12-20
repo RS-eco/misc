@@ -100,7 +100,7 @@ git reset HEAD~
 
 #####
 
-## Git Large File Storage
+## Git Large File Storagegit 
 
 git lfs install
 
@@ -121,8 +121,7 @@ git checkout --orphan latest_branch
 git add -A
 
 # Commit the changes
-git commit -am "Upload files
-"
+git commit -am "Upload files"
 
 # Delete the branch
 git branch -D master

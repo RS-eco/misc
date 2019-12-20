@@ -11,7 +11,7 @@ gUnaryUnion(countriesLow, as.character(countriesLow$continent))
 summarise(group_by(countriesLow_sf, continent))
 
 library(sf)
-countriesLow <- st_as_sf(countriesLow)
+countriesLow_sf <- st_as_sf(countriesLow)
 
 plot(countriesLow)
 
@@ -27,6 +27,7 @@ plot(continent)
 #' This is anyway a lot slower than rgeos::gUnaryUnion():
 
 system.time(gUU <- gUnaryUnion(countriesLow, as.character(countriesLow$continent)))
+
 #   user  system elapsed 
 #  1.882   0.000   1.886 
 system.time(tidy <- summarise(group_by(countriesLow_sf, continent)))
@@ -50,7 +51,7 @@ system.time(continent2 <- aggregate(countriesLow_sf[,"geometry"], list(countries
 
 #' This feature-only unary union is also slow and does not identify the features (gUnaryUnion inserts IDs in ID slots, accessed by row.names()):
 
-system.time(continent3 <-st_as_sfc( tapply(st_geometry(countriesLow_sf), list(countriesLow_sf$continent), st_union)))
+system.time(continent3 <-st_as_sfc(tapply(st_geometry(countriesLow_sf), list(countriesLow_sf$continent), st_union)))
 #   user  system elapsed 
 #  8.874   0.000   8.887
 
@@ -78,7 +79,8 @@ system.time(continent <- gUnaryUnion(countriesLow, id=countriesLow$continent))
 #' The dplyr pipeline with st_set_precision(1e8) inserted did not have this problem, and has identical timing.
 
 countriesLow = st_as_sf(countriesLow)
-system.time(continent <- countriesLow %>% st_set_precision(1e8) %>% select(continent) %>% group_by(continent) %>% summarize())
+system.time(continent <- countriesLow %>% st_set_precision(1e8) %>% select(continent) %>% 
+              group_by(continent) %>% summarize())
 
 #   user  system elapsed 
 #   1.94    0.00    1.94 

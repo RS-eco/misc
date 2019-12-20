@@ -3,6 +3,8 @@
 #' Set file directory
 filepath <- "D:/ISIMIP/ISIMIP2b/DerivedInputData/GCM/landonly/"
 
+
+
 #' All files within certain directory
 filenames <- list.files(filepath, recursive=T, full.names=TRUE)
 filenames <- filenames[!grepl(filenames, pattern=".pdf")]
