@@ -1,4 +1,4 @@
-install.packages("rworldmap")
+#install.packages("rworldmap")
 
 data(countriesLow, package="rworldmap")
 
@@ -8,14 +8,14 @@ plot(continent)
 
 gUnaryUnion(countriesLow, as.character(countriesLow$continent))
 
-summarise(group_by(countriesLow_sf, continent))
-
 library(sf)
 countriesLow_sf <- st_as_sf(countriesLow)
 
+library(dplyr)
+summarise(group_by(countriesLow_sf, continent))
+
 plot(countriesLow)
 
-library(dplyr)
 continent <- countriesLow %>% select(continent) %>% st_union(by_feature=T)
 
 plot(continent)
