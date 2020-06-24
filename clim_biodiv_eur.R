@@ -1,6 +1,6 @@
 #' ---
 #' title: "Pre-process European climate and Odonata data"
-#' author: "Matthias F. Biber"
+#' author: "RS-eco"
 #' ---
 
 #########################
