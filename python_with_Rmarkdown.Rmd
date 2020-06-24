@@ -1,6 +1,6 @@
 ---
 title: "Statistik für die Geisteswissenschaften mit Python"
-author: "Matthias Biber"
+author: "RS-eco"
 date: "25/10/2019"
 output: 
   pdf_document:
