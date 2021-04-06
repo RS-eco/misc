@@ -46,11 +46,11 @@ git remote
 # Create a location bookmark and send commit to a location
 git remote add origin https://github.com/RS-eco/individual-work.git
 
-# Upload file to GitHub (Push your master branch to remote master branch)
+# Upload file to GitHub (Push your main branch to remote main branch)
 
-git push origin master # Master is default branch
+git push origin main # Main is default branch
 
-git push -u origin master # Links remote with the local in a bookmark
+git push -u origin main # Links remote with the local in a bookmark
 
 # After this you only need to run
 
@@ -75,8 +75,8 @@ git log
 cd Documents/GitHub/rISIMIP
 git remote add origin https://github.com/RS-eco/rISIMIP.git
 git config remote.origin.url git@github.com:RS-eco/rISIMIP.git
-git pull origin master
-git push origin master
+git pull origin main
+git push origin main
 
 #Adding repository files to an index
 
@@ -88,7 +88,7 @@ git commit -a -m "Update of all files"
 
 #Push contents of local repository on GitHub
 
-git push origin master
+git push origin main
 
 # Push contents to branch (gh-pages for Website)
 
@@ -124,13 +124,13 @@ git add -A
 git commit -am "Upload files"
 
 # Delete the branch
-git branch -D master
+git branch -D main
 
 # Rename the current branch to master
-git branch -m master
+git branch -m main
 
 # Finally, force update your repository
-git push -f origin master
+git push -f origin main
 
 # PS: this will not keep your old commit history around
 
@@ -143,7 +143,7 @@ git gc --aggressive --prune=all
 
 # Find where your master commit points to
 
-git show master
+git show main
 
 # Show list of branches
 
@@ -163,7 +163,7 @@ git show newbranch
 
 git branch planet master^ # Does not work, why???
 
-git branch planet master~3
+git branch planet main~3
 
 # Creates a new branch and then checks it out
 
