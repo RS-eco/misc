@@ -170,7 +170,39 @@ Reduce(function(...) dplyr::left_join(..., by=c("x","y"), all.x=TRUE), data)
 #' **dplyr cheatsheet:** https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf
 #'
 
-#'4. Re-structuring tables
+#'4. Removing NAs from your dataset
+#'========================================================
+
+#' Create dummy dataset
+temp <- data.frame(x = 1:5, y = c(1,2,NA,4, 5), z = rep(NA, 5))
+temp
+
+#' Replace NAs with 0
+temp %>% mutate_at(vars(-c(x)), list(~ tidyr::replace_na(., 0)))
+
+#' Remove columns where all values are NA
+temp %>% select(where(function(x) any(!is.na(x))))
+
+#' Remove columns where a single value is NA
+temp %>% select(where(function(x) all(!is.na(x))))
+
+#' ## Remove rows where all values are NA 
+temp %>% filter_all(any_vars(!is.na(.)))
+temp %>% filter_all(any_vars(complete.cases(.)))  
+
+# Remove rows where certain values are NA:
+temp %>% filter_at(vars(-c(x)), any_vars(!is.na(.)))
+
+# Remove rows where only some values are NA:
+temp %>% filter_all(all_vars(!is.na(.)))
+temp %>% filter_all(all_vars(complete.cases(.)))  
+
+# or more succinctly:
+temp %>% filter(complete.cases(.))  
+temp %>% na.omit
+temp %>% tidyr::drop_na()
+
+#'5. Re-structuring tables
 #'========================================================
 
 #' ## Convert tables from wide into long format (gather)
@@ -201,7 +233,7 @@ stocks %>% gather(stock, price, -time) %>% head
 stocksm %>% spread(stock, price)
 stocksm %>% spread(time, price)
 
-#' 5. Fast access to large CSV files
+#' 6. Fast access to large CSV files
 #' ========================================================
 
 # Load package
@@ -222,10 +254,10 @@ write_csv(mtcars, file.path(dir, "mtcars.csv.xz"))
 
 #'** vroom package is even faster than readr for reading and writing .csv(.xz)-files!!!**
 
-#' 6. Fast way of storing data
+#' 7. Fast way of storing data
 #' ========================================================
 
-# Load fst package (super new package!!!)
+# Load fst package
 #+message=F
 library(fst)
 
@@ -245,7 +277,7 @@ y <- read_fst("dataset.fst") # read fst file
 y <- read_fst("dataset.fst", "B") # read selection of columns
 y <- read_fst("dataset.fst", "A", 100, 200) # read selection of columns and rows
 
-#' 7. Making plots with ggplot2
+#' 8. Making plots with ggplot2
 #' ========================================================
   
 library(ggplot2)
@@ -262,7 +294,7 @@ library(ggrepel) # Add labels to plot
 #' **ggplot2 cheatsheet:** https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf
 #'
 
-#' 8. Facet plots
+#' 9. Facet plots
 #' ========================================================
 
 #' ## 1d plots
@@ -291,7 +323,7 @@ p + facet_grid(drv ~ cyl)
 
 #' Also check out the `stickylabeller` package for unique facet labels.
 
-#' 9. Patchwork plots
+#' 10. Patchwork plots
 #' ========================================================
   
 #' Install patchwork package from GitHub
@@ -312,7 +344,7 @@ library(patchwork)
 # Display combined plots, which requires patchwork
 p1 + p2
 
-#' 10. Vector data in R
+#' 11. Vector data in R
 #' ========================================================
   
 # Another new package
@@ -359,7 +391,7 @@ nc %>% ggplot() + geom_sf(aes(fill=AREA))
 #' **Note: It is not straight forward to do this with geom_polygon!**
 #'
 
-#' 11. Maps with ggplot2
+#' 12. Maps with ggplot2
 #' ========================================================
 
 #' Load ggspatial package
@@ -395,7 +427,7 @@ ggplot(cities) +
   annotation_north_arrow(location = "br", which_north = "true") + 
   coord_sf(crs = 3995)
 
-#' 12. Maps with scatterpie
+#' 13. Maps with scatterpie
 #' ========================================================
 
 # Create dataset
@@ -427,7 +459,7 @@ ggplot(world, aes(long, lat)) +
                                      data=d, cols=LETTERS[1:4], color=NA, alpha=.8) +
   geom_scatterpie_legend(d$radius, x=-160, y=-55)
 
-#' 13. Ternary plot
+#' 14. Ternary plot
 #' ========================================================
 
 library(ggtern)
