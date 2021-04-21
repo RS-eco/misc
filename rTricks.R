@@ -181,10 +181,10 @@ temp
 temp %>% mutate_at(vars(-c(x)), list(~ tidyr::replace_na(., 0)))
 
 #' Remove columns where all values are NA
-temp %>% select(where(function(x) any(!is.na(x))))
+temp %>% dplyr::select(where(function(x) any(!is.na(x))))
 
 #' Remove columns where a single value is NA
-temp %>% select(where(function(x) all(!is.na(x))))
+temp %>% dplyr::select(where(function(x) all(!is.na(x))))
 
 #' ## Remove rows where all values are NA 
 temp %>% filter_all(any_vars(!is.na(.)))
