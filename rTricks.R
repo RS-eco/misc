@@ -70,7 +70,7 @@ rnorm(5) %>% abs %>% sort
 
 library(magrittr)
 
-#' then, check out the other pipe operators:**
+#' then, check out the other pipe operators:
 #'
 
 #' **%<>%	 compound assignment pipe-operator**
